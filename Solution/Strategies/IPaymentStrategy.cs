@@ -1,8 +1,6 @@
 ﻿using Domain;
 using Solution.Gateways;
-using Solution.Models.GatewayOne;
 using Solution.Requests;
-using Solution.Requests.GatewayOne;
 using Solution.Wrappers;
 using System;
 using System.Collections.Concurrent;
@@ -11,11 +9,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Solution
+namespace Solution.Strategies
 {
     public interface IPaymentStrategy
     {
-        void Pay(Payment parcecl);
+        void Pay(Payment parcel);
     }
 
     public abstract class PaymentStrategyBase : IPaymentStrategy
@@ -71,38 +69,6 @@ namespace Solution
             });
 
             return gatewayWrapper.Create<TRequest>(_provider);
-        }
-    }
-
-    public class PixOnePaymentStrategy : PaymentStrategyBase
-    {
-        public PixOnePaymentStrategy(IServiceProvider serviceProvider) : base(serviceProvider)
-        {
-        }
-
-        public override void Pay(Payment parcel)
-        {
-            var model = GetModel<PixOneModel>();
-            var request = GetRequest<PixOneRequest, PixOneModel>(parcel, model);
-            var gateway = GetGateway<PixOneRequest>();
-
-            gateway.Execute(request);
-        }
-    }
-
-    public class PixTwoPaymentStrategy : PaymentStrategyBase
-    {
-        public PixTwoPaymentStrategy(IServiceProvider serviceProvider) : base(serviceProvider)
-        {
-        }
-
-        public override void Pay(Payment parcel)
-        {
-            var model = GetModel<PixTwoModel>();
-            var request = GetRequest<PixTwoRequest, PixTwoModel>(parcel, model);
-            var gateway = GetGateway<PixTwoRequest>();
-
-            gateway.Execute(request);
         }
     }
 }

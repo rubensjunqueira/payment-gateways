@@ -3,6 +3,8 @@ using Solution.Gateways;
 using Solution.Models.GatewayOne;
 using Solution.Requests;
 using Solution.Requests.GatewayOne;
+using Solution.Strategies;
+using Solution.Strategies.GatewayOne;
 using Solution.Wrappers;
 using System;
 using System.Collections.Concurrent;
